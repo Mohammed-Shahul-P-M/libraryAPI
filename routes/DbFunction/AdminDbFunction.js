@@ -153,6 +153,8 @@ module.exports = {
     ,
     // CRUD for users 
     addUser: async userData => {
+        userData.approved = true
+        userData.borrowed = []
         try {
             userData.password = await bcrypt.hash(userData.password, 12)
             const newUser = (await User().insertOne(userData)).ops[0]

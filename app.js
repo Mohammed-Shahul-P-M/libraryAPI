@@ -4,10 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var exHbs = require('express-handlebars')
-var session = require('express-session')
 var fileUpload = require('express-fileupload')
 var dotenv = require('dotenv')
-
+var cors = require('cors')
 dotenv.config()
 var db = require('./config/mongodb')
 
@@ -23,7 +22,9 @@ const hbs = exHbs.create({
 })
 
 var app = express();
-
+app.use(cors({
+  origin: '*'
+}))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
